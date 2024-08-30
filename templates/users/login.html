@@ -1,0 +1,43 @@
+{% extends 'users/base.html' %} 
+{% block title %} {{page_title}} {% endblock title %}
+{% block contents %}
+
+<div class="container">
+    
+    <h1 class=" text-center" >লগইন</h1>
+    {% for message in messages %}
+
+        {% if message.tags == 'error' %}
+            <div class="alert-danger">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>{{message}}</strong>
+            </div>
+        {% elif message.tags == 'success' %}
+            <div class="alert-success">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>{{message}}</strong>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <div class="d-flex justify-content-center mx-auto">
+      <form method="post" enctype="multipart/form-data" class="border p-4 ">
+        {% csrf_token %}
+          <div class="col-md-12 form-group mb-2 fs-3">
+            <label for="email" class="placeholder">ইমেইল*</label>
+            {{ form.email }}
+          </div>
+          <div class="col-md-12 text-center mt-2">
+            <button type="submit" class="btn btn-success ">OTP সংগ্রহ</button>
+          </div>
+      </form>
+      
+    </div>
+    <div class="bottom-link">
+      অ্যাকাউন্ট নেই?
+      <a href="{% url 'user:register' %}">
+        রেজিস্টার করুন
+      </a>  
+    </div>
+
+</div>
+{% endblock contents %}

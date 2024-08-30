@@ -1,0 +1,115 @@
+{% extends 'backend/base.html' %}
+{% block title %} {{page_title}} {% endblock title %}
+
+{% block contents %}
+<div class="container p-5">
+    <div class="text-end">
+        <button type="button" class="btn bg-success" data-bs-toggle="modal" data-bs-target="#add_notification">
+            <i class="fa-solid fa-plus" style="color:white; font-size:50px;" ></i>
+        </button>
+    </div>
+    <h1 class='text-center'>Notifications</h1>
+        <!-- Button trigger modal -->
+
+        
+    {% for message in messages %}
+    {% if message.tags == 'error' %}
+        <div class="error">
+            <h2>{{message}}</h2>   
+        </div>
+    {% elif message.tags == 'success' %}
+        <div class="success">
+            <h2>{{message}}</h2>
+        </div>
+    {% endif %}
+    {% endfor %}
+    
+
+    <table class='table table-striped'>
+        <tr>
+            <th style="width:10%;">SL</th>
+            <th style="width:15%;">Message</th>
+            <th style="width:15%;">User</th>
+            <th style="width:15%;">Read</th>
+
+            <th style="width:15%;">Action</th>
+        </tr>
+        {% for notification in notifications %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{notification.message}}</td>
+            <td>{{notification.examinee.name}}</td>
+            <td>
+            {% if notification.is_read %}
+            <i class="fa-solid fa-circle-check" style="color:green; font-size:30px;" ></i>
+            {% else %}
+            <i class="fa-solid fa-circle-xmark" style="color:red; font-size:30px;" ></i>
+            {% endif %}
+            </td>
+            <td>
+                <a href="#" class='btn btn-danger'><i class="fa-solid fa-trash"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="add_notification" tabindex="-1" aria-labelledby="add_notificationLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Notification</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <input type="text" class="form-control" name="message" id="message" placeholder="Enter message">
+                    </div>
+                    <div class="form-group">
+                        <label for="receiver">Receiver</label>
+                        <select class="form-select" name="receiver" id="receiver" aria-label="Default select example">
+                            <option value="1">For All</option>
+                            <option value="2">Single Examinee</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="student-select" style="display:none;">
+                        <label for="student">Select Examinee</label>
+                        <select class="form-select" name="student" id="student">
+                            <option selected>Open this select menu</option>
+                            {% for examinee in examinees %}
+                            <option value="{{examinee.id}}">{{examinee.name}}</option>
+                                
+                            {% endfor %}
+                                
+                        </select>
+                    </div>
+                    <div class='text-center'>
+                    <button type="submit" class="btn btn-primary mt-1 text-center"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contents %}
+
+{% block scripts %}
+<script>
+    document.getElementById('receiver').addEventListener('change', function () {
+        var studentSelect = document.getElementById('student-select');
+        if (this.value == '2') {  // "Single Examinee" selected
+            studentSelect.style.display = 'block';
+        } else {  // "For All" selected
+            studentSelect.style.display = 'none';
+        }
+    });
+</script>
+{% endblock scripts %}

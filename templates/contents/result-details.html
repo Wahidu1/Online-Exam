@@ -1,0 +1,36 @@
+{% extends 'users/base.html' %}
+{% block title %} {{ page_title }} {% endblock title %}
+
+{% block contents %}
+<div class="container p-5">
+    <h1 class='text-center'>{{ exam.title }} এর রেজাল্ট</h1>
+    <table class="table table-striped">
+        <tr>
+            <th class="text-center">মোট প্রশ্ন</th>
+            <th class="text-center">সঠিক উত্তর</th>
+            <th class="text-center">ভুল উত্তর</th>
+        </tr> 
+        <tr> 
+            <td class="text-center">{{ response_details|length }}</td>
+            <td class="text-center">{{ correct_count }}</td>
+            <td class="text-center">{{ incorrect_count }}</td>
+        </tr>
+    </table>
+    
+    <div class="card p-5">
+        {% for detail in response_details %}
+        <div class="card-body">
+            {{ forloop.counter }}. {{ detail.question }} <br>
+            আপনার উত্তর: {{ detail.your_answer }} - 
+            {% if detail.is_correct %}
+                <span class="badge bg-success">সঠিক</span>
+            {% else %}
+                <span class="badge bg-danger">ভুল</span> <br>
+                <span class="bg-success text-light p-1 mt-2">সঠিক উত্তর: {{ detail.correct_answer }}</span>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    
+</div>
+{% endblock contents %}

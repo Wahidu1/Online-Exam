@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+    {% block title %}
+    Page Title
+    {% endblock title %}
+    </title>
+    <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/contents.css' %}">
+    {% block stylesheet %}
+        
+    {% endblock stylesheet %}
+        
+</head>
+<body>
+    {% include 'includes/side-bar.html' %}
+    {% block contents %}
+        
+    {% endblock contents %}
+    
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    
+    {% block scripts %}
+        
+    {% endblock scripts %}
+        
+        
+
+
+</body>
+</html>

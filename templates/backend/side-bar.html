@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container-fluid">
+    <span class="navbar-brand fw-bolder fs-4 website-title">Online Exam</span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <li class="nav-item">
+            <a class="nav-link {% if page_name == 'dashboard' %} active {% endif %}" aria-current="page" href="{% url 'backend:dashboard' %}">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page_name == 'exam_add' %}active{% endif %}" href="{% url 'backend:exam_add' %}">Exam Add</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page_name == 'exam_list' %}active{% endif %}" href="{% url 'backend:exam_list'%}">Exam List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page_name == 'question_add' %}active{% endif %}" href="{% url 'backend:question_add'%}">Question Add</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page_name == 'exam_history' %}active{% endif %}" href="{% url 'backend:exam_history'%}">Exam History</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page_name == 'exam_list' %}active{% endif %}" href="{% url 'backend:examinee_list'%}">Examinee List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page_name == 'notification' %}active{% endif %}" href="{% url 'backend:notification'%}">Notification</a>
+          </li>
+
+
+        </ul>
+      <div class="d-flex">
+        <div class="dropdown">
+          <button class="btn btn-success dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		        Admin
+            
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="btn btn-primary dropdown-item" href="{% url 'backend:logout' %}">Logout</a></li>
+          </ul>
+        </div>
+
+          
+      </div>
+    </div>
+  </div>
+</nav>

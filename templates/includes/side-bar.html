@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container-fluid">
+    <a class="navbar-brand fs-2 title" href="#">অনলাইন পরীক্ষা</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      {% if is_logged_in %}
+
+          <li class="nav-item">
+            <a class="nav-link fs-5 {% if page_name == 'dashboard' %} active {% endif %}" aria-current="page" href="{% url 'content:dashboard' %}">হোম</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fs-5 {% if page_name == 'exam' %}active{% endif %}" href="{% url 'content:exam' %}">পরীক্ষায় অংশগ্রহণ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fs-5 {% if page_name == 'exam_history' %}active{% endif %}" href="{% url 'content:exam_history'%}">রেজাল্ট সমূহ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fs-5 {% if page_name == 'notification' %}active{% endif %}" href="{% url 'content:notification'%}">নোটিফিকশন </a>
+          </li>
+
+      {% endif %}
+
+        </ul>
+      <div class="d-flex">
+        
+        {% if is_logged_in %}
+        <ul class="notification-drop">
+          <li class="item">
+            <i class="fa-solid fa-bell"></i>
+            {% if unread_notifications > 0 %}
+            <span class="btn__badge pulse-button">{{unread_notifications}}</span>     
+            {% endif %}
+              <ul>
+                {% for notification in notifications %}
+                <li class="position-relative">
+                  <a href="{% url 'content:notification_details' pk=notification.id %}" class='link'>
+                    {{ notification.message }}
+                </a>
+                  {% if notification.is_read == False %} 
+                  <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                    
+                  </span>
+                  {% endif %} 
+                </li>
+                <hr>
+                {% endfor %}
+              </ul>
+          </li>
+      </ul>
+        <div class="dropdown">
+          <button class="btn btn-success dropdown-toggle fs-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		        <img class="rounded-circle" style="width:40px; height:40px;" src="{{ examinee.image.url }}" />
+            
+            {{examinee.name}} 
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="btn btn-primary dropdown-item fs-5" href="{% url 'content:profile' %}">প্রোফাইল</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="btn btn-primary dropdown-item fs-5" href="{% url 'content:logout' %}">লগআউট</a></li>
+          </ul>
+        </div>
+        {% else %}
+          <a class="btn btn-primary" href="#">লগইন</a>
+        {% endif %}
+          
+      </div>
+    </div>
+  </div>
+</nav>
+
+

@@ -1,0 +1,31 @@
+{% extends 'backend/base.html' %} 
+{% block title %} {{page_title}} {% endblock title %}
+
+{% block stylesheet %}
+
+{% endblock stylesheet %}
+    
+
+{% block contents %}
+<div class="container">
+  <div class="border m-5 ">
+    <h1 class=text-center> {{exam.title}} </h1>
+    <div class="card p-5">
+      {% for question in questions_with_choices %}
+      <div class="card-body">
+          <h5> {{forloop.counter}}. {{question.question.text}} </h5>
+          <ol type="a">
+          {% for choice in question.choices %}
+              <li><label> {{choice.text}} </label></li>
+          {% endfor %}
+      </ol>
+
+      </div>
+  {% endfor %}
+    </div>
+
+</div>
+</div>
+
+{% endblock contents %}
+

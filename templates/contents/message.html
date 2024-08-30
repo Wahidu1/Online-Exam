@@ -1,0 +1,91 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block title %} {{page_title}} {% endblock title %}
+
+
+{% block stylesheet %}
+
+{% endblock stylesheet %}
+    
+{% block contents %}
+<div class="content">
+    <div class="d-flex justify-content-center mx-auto">
+        <div class="card m-3" style="width: auto;">
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <div class="card-body">
+                <img class="card-img-top" src="{% static 'images\timesup.gif' %}" alt="Girl in a jacket" style="width:200px !important;">
+    
+                  <h2 class="card-title text-center">{{message}}</h2>
+                </div>
+
+            {% elif message.tags == 'warning' %}
+            <div class="card-body">
+    
+                  <h2 class="card-title">{{exam.title}}</h2>
+                  <p class="card-text">পরীক্ষা শুরু হবে: {{exam.start_time}}</p>
+                  <p class="card-text text-center">সময় অবশিষ্ট আছে </p>
+                  <div id="timer" class='timer d-flex'>
+                    <div class="fs-4 p-2" id="days"></div>  
+                    <div class="fs-4 p-2" id="hours"></div>
+                    <div class="fs-4 p-2" id="minutes"></div>
+                    <div class="fs-4 p-2" id="seconds"></div>
+                </div>
+                <div class="col-md-12 text-center mt-2">
+                    <a id="start_exam" class='btn btn-success' style="display:none" href="{% url 'content:question' id=exam.id %}">পরীক্ষা শুরু</a>
+
+                  </div>
+
+                </div>
+
+            {% endif %}
+        {% endfor %}
+
+          </div>
+    </div>
+</div>
+
+
+</div>
+{% endblock contents %}
+
+{% block scripts %}
+<script>
+    function makeTimer() {
+        // Replace this line with the correctly formatted time string or timestamp
+        var endTime = new Date("{{ exam.start_time|date:'F d, Y H:i:s' }}").getTime(); 
+        
+        var now = new Date().getTime();
+        var timeLeft = endTime - now;
+        var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        if (days > 0) {
+            document.getElementById("days").innerHTML = days + "<span>Days</span>";
+        }
+        if ( days < 0 && hours < 0 && minutes < 0 && seconds < 0 ){
+            document.getElementById("start_exam").style.display = "inline";
+            document.getElementById("timer").style.display = "none";
+
+        }else{
+            document.getElementById("start_exam").style.display = "none";
+        }
+        
+        document.getElementById("hours").innerHTML = hours + "<span>Hours</span>";
+        document.getElementById("minutes").innerHTML = minutes + "<span>Minutes</span>";
+        document.getElementById("seconds").innerHTML = seconds + "<span>Seconds</span>";
+        
+        // Stop the timer when the countdown is over
+        if (timeLeft < 0) {
+            clearInterval(timerInterval);
+            document.getElementById("timer").innerHTML = "EXPIRED";
+        }
+    }
+
+    var timerInterval = setInterval(makeTimer, 1000);
+</script>
+
+{% endblock scripts %}
+    

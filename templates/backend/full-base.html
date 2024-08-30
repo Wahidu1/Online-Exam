@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+    {% block title %}
+    Page Title
+    {% endblock title %}
+    </title>
+    <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/backend.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+
+    {% block stylesheet %}
+        
+    {% endblock stylesheet %}
+        
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col py-3">
+                {% block contents %}
+                sadsad
+            {% endblock contents %}
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/backend.js' %}"></script>
+
+
+
+    
+    {% block scripts %}
+        
+    {% endblock scripts %}
+        
+        
+
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+@font-face {
+  font-family: 'BEATTECH';
+  src: local('Abc'),
+       url('../fonts/BEATTECH.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'Bread';
+  src: local('Abc'),
+       url('../fonts/Bread.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'Monday';
+  src: local('Abc'),
+       url('../fonts/Monday.ttf') format("truetype");
+}
+@font-face {
+  font-family: 'Sunshine';
+  src: local('Abc'),
+       url('../fonts/Sunshine.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'PlayfairDisplay';
+  src: local('Abc'),
+       url('../fonts/PlayfairDisplay.ttf') format("truetype");
+}
+@font-face {
+  font-family: 'HigherJump';
+  src: local('Abc'),
+       url('../fonts/HigherJump.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'Rockybilly';
+  src: local('Abc'),
+       url('../fonts/Rockybilly.ttf') format("truetype");
+}
+
+
+
+
+
+body {
+  font-family: 'PlayfairDisplay', sans-serif !important;
+}
+.website-title{
+  font-family: 'HigherJump', sans-serif !important;
+  color:white;  
+
+}
+.navbar-nav{
+  font-family: 'Monday', sans-serif !important;
+
+}
+
+.navbar-custom{
+    background-color:#0c4242;
+  }
+  .navbar-custom a{
+    color: white;
+  }
+  
+  .nav-item:hover{
+    border-bottom: solid 3px #fff; 
+  }
+  
+  .nav-link:hover{
+    background-color:#fff;
+    color:black !important;
+  
+  }
+  
+  .active{
+    background-color:#fff;
+    color:black !important;
+  
+  }
+  
+  .dropdown-item{
+    color:black !important;
+  }
+  .profile-img{
+    width: 200px;
+    height: 200px;
+  }
+  .card{
+    box-shadow: #000 0px 5px 15px;
+  }
+  .box{
+    box-shadow: #0C4242 0px 5px 15px;
+
+  }
+  .title-box{
+    border-top: 1px solid #000 !important;
+    border-bottom: 1px solid #000 !important;
+    background-color: #c8e1e6;
+  }

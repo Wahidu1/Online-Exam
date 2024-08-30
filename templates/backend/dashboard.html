@@ -1,0 +1,28 @@
+{% extends 'backend/base.html' %} 
+{% block title %} {{page_title}} {% endblock title %}
+{% block contents %}
+<div class="container">
+  <div class="d-flex justify-content-center mx-auto">
+
+    <div class="card m-3" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Total Examinee</h5>
+        <p class="card-text">{{number_of_examinee}}</p>
+        <a href="#" class="btn btn-primary"> Examinee List <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="card m-3" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Total Exam</h5>
+        <p class="card-text">{{number_of_exam}}</p>
+        <a href="{% url 'backend:exam_list'%}"  class="btn btn-primary"> Exam List <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+
+        
+    
+</div>
+</div>
+{% endblock contents %}

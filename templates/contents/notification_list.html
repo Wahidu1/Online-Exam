@@ -1,0 +1,22 @@
+{% extends 'users/base.html' %}
+{% block title %} {{page_title}} {% endblock title %}
+
+{% block contents %}
+<div class="container p-5">
+    <h1 class="text-center">নোটিফিকশন </h1>
+    
+    {% for notification in notifications %}
+    <li class="position-relative" >
+        <a href="{% url 'content:notification_details' pk=notification.id %}" class='btn'>
+            {{ notification.message }}
+        </a>
+        {% if notification.is_read == False %} 
+            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
+        {% endif %} 
+    </li>
+    <hr>         
+    {% endfor %}
+    
+        
+</div>
+{% endblock contents %}

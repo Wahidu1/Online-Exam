@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+    {% block title %}
+    Page Title
+    {% endblock title %}
+    </title>
+    <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'bangla.ttf' %}">
+
+
+    {% block stylesheet %}
+   
+    {% endblock stylesheet %}
+        
+</head>
+<body>
+    {% include 'includes/side-bar.html' %}
+    {% block contents %}
+        
+    {% endblock contents %}
+
+
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+
+
+    {% block scripts %}
+    <script>
+        $(document).ready(function() {
+            $(".notification-drop .item").on('click', function() {
+                $(this).find('ul').toggle();
+            });
+        });
+    </script>
+    {% endblock scripts %}
+
+
+
+</body>
+</html>

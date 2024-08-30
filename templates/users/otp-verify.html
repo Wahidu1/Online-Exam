@@ -1,0 +1,84 @@
+{% extends 'users/base.html' %} 
+{% block title %} {{page_title}} {% endblock title %}
+{% block contents %}
+
+<div class="container">
+    
+    <h1 class="text-center" >ওটিপি ভেরিফাই</h1>
+    {% for message in messages %}
+
+        {% if message.tags == 'error' %}
+            <div class="alert-danger">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>{{message}}</strong>
+            </div>
+        {% elif message.tags == 'success' %}
+            <div class="alert-success">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>{{message}}</strong>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <h4 class="text-center" >[ ওটিপি এর জন্য আপনার ইমেল চেক করুন. ]</h4>
+    <form method="post" class="p-4 ">
+        {% csrf_token %}
+        <div class="justify-content-center mx-auto">
+            <div class="col-md-12 d-flex justify-content-center mx-auto">
+                <div class="d-flex col-md-4">
+                    <div class="form-group ms-2 fs-3">
+                        {{form.digit1}}
+                    </div>
+                    <div class="form-group ms-2 fs-3">
+                        {{form.digit2}}
+                    </div>
+                    <div class="form-group ms-2 fs-3">
+                        {{form.digit3}}
+                    </div>
+                    <div class="form-group ms-2 fs-3">
+                        {{form.digit4}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 text-center mt-2">
+                <button type="submit" class="btn btn-success ">সাবমিট</button>
+            </div>
+
+        </div>
+    
+    </form>
+
+
+</div>
+{% endblock contents %}
+
+
+{% block scripts %}
+<script>
+    const inputs = document.querySelectorAll(".otp-input");
+    inputs.forEach((input, index) => {
+        input.addEventListener("input", function(e) {
+            const val = input.value;
+            if (isNaN(val)) {
+                input.value = "";
+                return;
+            }
+            
+            if (val !== "" && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
+        });
+        input.addEventListener("keyup", function(e) {
+            const key = e.key.toLowerCase();
+            
+            if (key === "backspace" || key === "delete") {
+                input.value = "";
+                if (index > 0) {
+                    inputs[index - 1].focus();
+                }
+            }
+        });
+    });
+</script>
+{% endblock scripts %}
+    

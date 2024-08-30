@@ -1,0 +1,64 @@
+{% extends 'users/base.html' %} 
+{% block title %} {{page_title}} {% endblock title %}
+
+{% block stylesheet %}
+
+{% endblock stylesheet %}
+
+    
+{% block contents %}
+<div class="container">
+    <h1 class="text-center">প্রোফাইল আপডেট</h1>
+    {% for message in messages %}
+
+        {% if message.tags == 'error' %}
+            <div class="alert-danger">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>{{message}}</strong>
+            </div>
+        {% elif message.tags == 'success' %}
+            <div class="alert-success">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>{{message}}</strong>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <div class="col-md-12 m-4 border rounded p-5">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-4 form-group mb-2 fs-3">
+                    <label for="name" class="form-label">নাম*</label>
+                    {{ form.name }}
+                </div>
+                <div class="col-md-4 form-group mb-2 fs-3">
+                    <label for="name" class="form-label">ইমেইল*</label>
+                    {{ form.email }}
+                </div>
+                <div class="col-md-4 form-group mb-2 fs-3">
+                    <label for="name" class="form-label">পিতার নাম</label>
+                    {{ form.father_name }}
+                </div>
+                <div class="col-md-4 form-group mb-2 fs-3">
+                    <label for="name" class="form-label">শিক্ষাগত যোগ্যতা</label>
+                    {{ form.education_qualification }}
+                </div>
+                <div class="col-md-4 form-group mb-2 fs-3">
+                    <label for="name" class="form-label">মোবাইল*</label>
+                    {{ form.phone }}
+                </div>
+                <div class="col-md-4 form-group mb-2">
+                    <label for="name" class="form-label">ছবি*</label>
+                    {{ form.image }}
+                </div>
+            </div>
+            <div class="col-md-12 text-center mt-2">
+                <button type="submit" class="btn btn-success ">আপডেট প্রোফাইল</button>
+              </div>
+           
+        </form>
+    </div>
+
+</div>
+
+{% endblock contents %}

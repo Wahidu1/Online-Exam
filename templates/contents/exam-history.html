@@ -1,0 +1,32 @@
+{% extends 'users/base.html' %}
+{% block title %} {{page_title}} {% endblock title %}
+
+{% block contents %}
+<div class="container p-5">
+    <h1 class="text-center">পরীক্ষা সমূহ</h1>
+<table class='table table-hover border' >
+    <tr>
+      <th>পরীক্ষা নাম</th>
+      <th>মোট প্রশ্ন</th>
+      <th>সঠিক উত্তর</th>
+      <th>ভুল উত্তর</th>
+      <th>ক্রিয়া</th>
+    </tr>
+
+    
+    {% for exam, stats in exams.items %}
+    <tr>
+        <td> {{stats.exam_title}} </td>
+        <td> {{ stats.total_questions }} </td>
+        <td> {{ stats.correct_answers }} </td>
+        <td> {{ stats.incorrect_answers }} </td>
+        <td><a href="{% url 'content:results' exam_id=exam %}" class='btn btn-primary'>বিস্তারিত</a></td>
+      </tr>
+    {% endfor %}
+        
+
+  </table>
+    
+
+</div>
+{% endblock contents %}

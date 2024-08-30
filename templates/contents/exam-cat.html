@@ -1,0 +1,27 @@
+{% extends 'users/base.html' %} 
+{% block title %} {{page_title}} {% endblock title %}
+{% block contents %}
+<main>
+
+  <div class="content">
+    <div class="d-flex justify-content-center mx-auto">
+        
+        
+        {% for single_exam in exams %}
+        <div class="card m-3" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{single_exam.title}}</h5>
+            <p class="card-text">{{single_exam.description|slice:40}}</p>
+            <p class="card-text">শুরুর সময়: {{single_exam.start_time}}</p>
+            <p class="card-text">শেষের সময়: {{single_exam.end_time}}</p>
+
+            <a href="{% url 'content:question' id=single_exam.id %}" class="btn btn-primary"> পরীক্ষায় অংশগ্রহণ</a>
+          </div>
+        </div>
+        {% endfor %}
+            
+        
+    </div>
+  </div>
+</main>
+{% endblock contents %}

@@ -1,0 +1,121 @@
+{% extends 'backend/base.html' %} 
+{% block title %} {{page_title}} {% endblock title %}
+
+{% block stylesheet %}
+
+{% endblock stylesheet %}
+
+    
+{% block contents %}
+
+  <div class="container">
+    <div class="col-md-12">
+
+    {% for message in messages %}
+      {% if message.tags == 'error' %}
+        <div class="error">
+          <h2>{{ message }}</h2>   
+        </div>
+      {% elif message.tags == 'success' %}
+          <div class="success">
+              <h2>{{ message }}</h2>
+          </div>
+      {% endif %}
+    {% endfor %}
+    <div class="info">
+      <form method="get" class="box border m-5 p-3">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="exam_id">Choose an Exam:</label>
+              <select name="exam_id" id="exam_id" class="form-select" >
+                {% for single_exam in exams %}
+                  <option value="{{ single_exam.id }}"  {% if exam and exam.id == single_exam.id %}selected{% endif %}>{{ single_exam.title }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-md-6 form-group">
+          
+          <!-- Input field for Number of Questions -->
+          <label for="number_of_question">Number of Questions</label>
+          <input class="form-control" id="number_of_question" type="number" name="number_of_question" value="{{ num_questions }}">
+          
+            </div>
+          </div>
+
+          <div class="col-md-12 text-center mt-3">
+            <button type="submit" class='btn btn-success'>Generate Questions</button>
+          </div>
+          
+      </form>
+    </div>
+    
+    {% if formset %}
+    <div class="box border m-5 p-3">
+      <form method="post">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        
+          {% for form in formset %}
+          <div class="row border m-2 p-2">
+        <span class="fw-bolder">{{forloop.counter}})</span>
+        <div class="col-md-12 form-group">
+          
+          <!-- Input field for Number of Questions -->
+          <label for="number_of_question">Question</label>
+          {{ form.question }}
+        </div>
+        <div class="col-md-3 form-group">
+          
+          <!-- Input field for Number of Questions -->
+          <label for="number_of_question">Option 1</label>
+          {{ form.choice_1 }}
+        </div>
+        <div class="col-md-3 form-group">
+          
+          <!-- Input field for Number of Questions -->
+          <label for="number_of_question">Option 2</label>
+          {{ form.choice_2 }}
+        </div>
+        <div class="col-md-3 form-group">
+          
+          <!-- Input field for Number of Questions -->
+          <label for="number_of_question">Option 3</label>
+          {{ form.choice_3 }}
+        </div>
+        <div class="col-md-3 form-group">
+          
+          <!-- Input field for Number of Questions -->
+          <label for="number_of_question">Option 4</label>
+          {{ form.choice_4 }}
+        </div>
+        <div class="col-md-6 form-group">
+          
+          <!-- Input field for Number of Questions -->
+          <label for="number_of_question">Correct Option</label>
+          {{ form.correct_answer }}
+        </div>
+      </div>
+
+        {% endfor %}  
+        <div class="col-md-12 text-center">
+          <button type="submit" class="btn btn-primary">Save Questions</button>
+
+        </div>
+        
+      </form>
+    
+    </div>
+    {% endif %}
+  </div>
+
+  </div>
+  
+{% endblock contents %}
+
+
+
+{% block scripts %}
+
+
+{% endblock scripts %}
+    

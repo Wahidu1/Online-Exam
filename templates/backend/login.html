@@ -1,0 +1,56 @@
+{% extends 'backend/full-base.html' %} 
+{% block title %} Login {% endblock title %}
+{% block contents %}
+
+<div class="container">
+    
+    {% for message in messages %}
+
+        {% if message.tags == 'error' %}
+            <div class="alert-danger">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>{{message}}</strong>
+            </div>
+        {% elif message.tags == 'success' %}
+            <div class="alert-success">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>{{message}}</strong>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+          <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <h1>Login</h1>
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <!-- Email input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input class="form-control form-control-lg" placeholder="Enter Username" type="text" id="username" name="username" value="{{exam}}" required>
+                  <label class="form-label" for="username">Username</label>
+                </div>
+      
+                <!-- Password input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                <input class="form-control form-control-lg" placeholder="Enter Password" type="password" id="password" name="password" value="{{examinee}}" required>
+                  <label class="form-label" for="password">Password</label>
+                </div>
+      
+      
+                <!-- Submit button -->
+                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block">Sign in</button>
+      
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+</div>
+{% endblock contents %}

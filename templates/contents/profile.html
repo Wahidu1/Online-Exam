@@ -1,0 +1,24 @@
+{% extends 'users/base.html' %} 
+{% block title %} {{page_title}} {% endblock title %}
+{% block contents %}
+<div class="container">
+  <div class="col-md-12 m-3">
+    <div class="row border p-4">
+      <div class="col-md-4 text-end pe-3">
+        <img class="profile-img" src=" {{examinee.image.url}} " alt="Profile Picture">
+      </div>
+      <div class="col-md-8 ps-3 border-left">
+        <h1>{{ examinee.name }}</h1>
+        <p class="fs-5"> <strong>ইমেইল: </strong>{{ examinee.email }}</p>
+        <p class="fs-5"> <strong>মোবাইল: </strong>{{ examinee.phone }}</p>
+        <p class="fs-5"><strong>পিতার নাম:</strong> {{ examinee.father_name }}</p>
+        <p class="fs-5"><strong>শিক্ষাগত যোগ্যতা:</strong> {{ examinee.education_qualification }}</p>
+        <a class='btn btn-primary' href="{% url 'content:profile_update' %}"><i class="fa-solid fa-pen-to-square"></i> আপডেট</a>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock contents %}

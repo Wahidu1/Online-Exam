@@ -1,0 +1,49 @@
+{% extends 'backend/base.html' %}
+{% block title %} {{page_title}} {% endblock title %}
+
+{% block contents %}
+<div class="container">
+    <h1 class = 'text-center'>Exam List</h1>
+    {% for message in messages %}
+    {% if message.tags == 'error' %}
+        <div class="error">
+            <h2> {{message}}</h2>   
+        </div>
+    {% elif message.tags == 'success' %}
+        <div class="success">
+            <h2> {{message}}</h2>
+        </div>
+    {% endif %}
+{% endfor %}
+    
+<table class='table table-striped' >
+    <tr>
+      <th style="width:10%;" >SL</th>
+      <th style="width:15%;" >Exam Name</th>
+      <th style="width:15%;" >Start Date & Time</th>
+      <th style="width:15%;" >End Date & Time</th>
+      <th style="width:10%;" >Action</th>
+    </tr>
+
+    
+    {% for single_exam in exams %}
+    <tr>
+        <td> {{forloop.counter}} </td>
+        <td> {{single_exam.title}} </td>
+        <td> {{ single_exam.start_time }} </td>
+        <td> {{ single_exam.end_time }} </td>
+        <td>
+          <a href="{% url 'backend:exam_edit' exam_id=single_exam.id %}" class='btn btn-success'><i class="fa-solid fa-pen-to-square"></i></a>
+          <a href="{% url 'backend:question' id=single_exam.id %}" class='btn btn-primary'><i class="fa-solid fa-eye"></i></a>
+          
+          <a href="#" class='btn btn-warning'><i class="fa-solid fa-trash"></i></a>
+        </td>
+      </tr>
+    {% endfor %}
+        
+
+  </table>
+    
+
+</div>
+{% endblock contents %}

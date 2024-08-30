@@ -1,0 +1,52 @@
+{% extends 'backend/base.html' %}
+{% block title %} {{page_title}} {% endblock title %}
+
+{% block contents %}
+<div class="container p-5">
+    <h1 class = 'text-center'>Examinee List</h1>
+    {% for message in messages %}
+    {% if message.tags == 'error' %}
+        <div class="error">
+            <h2> {{message}}</h2>   
+        </div>
+    {% elif message.tags == 'success' %}
+        <div class="success">
+            <h2> {{message}}</h2>
+        </div>
+    {% endif %}
+{% endfor %}
+    
+<table class='table table-striped' >
+    <tr>
+      <th style="width:10%;" >SL</th>
+      <th style="width:15%;" >Photo</th>
+      <th style="width:20%;" >Name</th>
+      <th style="width:20%;" >Email</th>
+      <th style="width:20%;" >Phone</th>
+      <th style="width:15%;" >Action</th>
+    </tr>
+
+    
+    {% for single_examinee in examinees %}
+    <tr>
+        <td> {{forloop.counter}} </td>
+        <td> 
+          <img src="{{single_examinee.image.url}} " style="width:40px;" >
+        </td>
+        <td> {{single_examinee.name}} </td>
+        <td> {{ single_examinee.email }} </td>
+        <td> {{ single_examinee.phone }} </td>
+        <td>
+          <a href="{% url 'backend:examinee_profile_update' id=single_examinee.id %}" class='btn btn-success'><i class="fa-solid fa-pen-to-square"></i></a>
+          <a href="{% url 'backend:examinee_profile_page' id=single_examinee.id %}" class='btn btn-primary'><i class="fa-solid fa-eye"></i></a>
+          <a href="#" class='btn btn-warning'><i class="fa-solid fa-trash"></i></a>
+        </td>
+      </tr>
+    {% endfor %}
+        
+
+  </table>
+    
+
+</div>
+{% endblock contents %}

@@ -1,0 +1,35 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block title %} {{page_title}} {% endblock title %}
+
+{% block contents %}
+<div class="content">
+    <div class="d-flex justify-content-center mx-auto">
+    
+    <div class="card m-3" style="width: auto;">
+        {% for message in messages %}
+        {% if message.tags == "success" %}
+        <div class="card-body mx-auto">
+            <div class="img">
+            <img class="text-center" style="width:200px;"  src="{% static 'images\checked.png' %}" alt="Girl in a jacket">
+
+            </div>
+            <h2> {{message}} </h2>   
+            <div class="col-md-12 text-center mt-2">
+                <a class='btn btn-success' href="{% url 'content:results' exam_id=exam_id %}">View Results</a> 
+              </div>
+            </div>
+        {% elif message.tags == "error" %}
+        <div class="card-body">
+            <img class="card-img-top"  src="{% static 'images\cancel.png' %}" alt="Girl in a jacket">
+            <h2> {{message}} </h2>   
+            </div>
+        {% endif %}
+            
+        
+    {% endfor %}
+    </div>
+    </div>
+
+</div>
+{% endblock contents %}

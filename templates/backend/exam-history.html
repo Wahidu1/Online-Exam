@@ -1,0 +1,46 @@
+{% extends 'backend/base.html' %}
+{% block title %} {{page_title}} {% endblock title %}
+
+{% block contents %}
+<div class="container p-5">
+    <h1 class='text-center'>Exam History</h1>
+    
+    <table class='table table-striped' >
+        <tr>
+          <th>Examinee Name</th>
+          <th>Exam Name</th>
+          <th>Total Questions</th>
+          <th>Correct Answers</th>
+          <th>Incorrect Answers</th>
+          <th>Action</th>
+        </tr>
+
+      
+    
+          
+        {% for examinee, stats in exams.items %}
+          {% for exam, stat in stats.items %}
+            <tr>
+                <td> {{stat.examinee_name}} </td>
+                <td> {{stat.exam_title}} </td>
+                <td> {{stat.total_questions }} </td>
+                <td> {{stat.correct_answers }} </td>
+                <td> {{stat.incorrect_answers }} </td>
+                <td>
+                  <form method="get" action="{% url 'backend:results' %}">
+                    <input type="hidden" id="exam_id" name="exam_id" value="{{exam}}">
+                    <input type="hidden" id="examinee_id" name="examinee_id" value="{{examinee}}">
+                    <button type=submit class='btn btn-secondary'>Details</button>
+                  </form>
+
+                </td>
+              </tr>
+          {% endfor %}
+        {% endfor %}
+            
+
+      </table>
+        
+
+</div>
+{% endblock contents %}
